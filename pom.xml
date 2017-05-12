@@ -1,0 +1,168 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.continuum</groupId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ReadyAPIPro</name>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>SmartBearPluginRepository</id>
+			<url>http://smartbearsoftware.com/repository/maven2</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<repositories>
+		<repository>
+			<id>smartbear</id>
+			<name>smartbear repository</name>
+			<url>http://smartbearsoftware.com/repository/maven2</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.smartbear</groupId>
+			<artifactId>ready-api-soapui-pro</artifactId>
+			<version>1.8.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.smartbear</groupId>
+			<artifactId>ready-api-soapui-pro</artifactId>
+			<version>1.8.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4-3.0</artifactId>
+			<version>4-3.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/sqljdbc4-3.0.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.smartbear</groupId>
+			<artifactId>ready-api-runners</artifactId>
+			<version>1.8.5</version>
+		</dependency>
+		<dependency>
+			<groupId>com.smartbear</groupId>
+			<artifactId>ready-api-core</artifactId>
+			<version>1.8.5</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+
+					<suiteXmlFiles>
+
+						<suiteXmlFile>testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.18.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<systemPropertyVariables>
+						<jenkins>${jenkins}</jenkins>
+						<reportReciever>${reportReciever}</reportReciever>
+						<ProjectFile>${ProjectFile}</ProjectFile>
+						<EndPoint>${EndPoint}</EndPoint>
+						<reportMail>${reportMail}</reportMail>
+						<TestRun>${TestRun}</TestRun>
+						<ProjectName>${ProjectName}</ProjectName>
+						<TestRailUpdateFlag>${TestRun}</TestRailUpdateFlag>
+						<SoapUIFilePath>${SoapUIFilePath}</SoapUIFilePath>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<compilerArgument>-Werror</compilerArgument>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${project.basedir}\test-report-new</directory>
+							<includes>
+								<include>**/*.xml</include>
+								<include>**/*.html</include>
+                                <include>**/*.txt</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!--Add Maven SureFire Plugin to generate JUnit XML reports. -->
+	<reporting>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.19.1</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<artifactId>WebServiceTesting</artifactId>
+</project>

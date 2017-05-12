@@ -1,0 +1,2 @@
+echo "Install License"
+java -DlicenseFilePath=ReadyAPIPro/lib/soapUI-license-SO00045111-1-3.key -DfirstName=Sneha -DlastName=Chemburkar -Demail=sneha.chemburkar@continuum.net -jar ReadyAPIPro/lib/ready-api-license-manager-1.1.jar -c
